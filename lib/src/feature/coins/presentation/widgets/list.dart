@@ -14,23 +14,25 @@ Color generateRandomColor() {
 }
 
 class CoinsListWidget extends StatelessWidget {
-  // final ResponseEntity data;
+  final ResponseEntity? data;
 
-  const CoinsListWidget({super.key});
+  const CoinsListWidget({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      // itemCount: data.data?.length,
-      itemCount: 3,
+      itemCount: data?.data?.length ?? 0,
+      // itemCount: 3,
       separatorBuilder: (context, index) => SizedBox(height: 28),
       itemBuilder:
           (context, index) => CoinTileWidget(
             color: generateRandomColor(),
-            // name: data.data?[index].name ?? '',
-            name: 'BTC',
-            // price: data.data?[index].priceUsd ?? '',
-            price: '1200',
+            name: data?.data?[index].name ?? '',
+            // name: 'BTC',
+            price: double.parse(
+              data?.data?[index].priceUsd ?? '',
+            ).toStringAsFixed(2),
+            // price: '1200',
           ),
     );
   }

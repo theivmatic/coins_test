@@ -16,7 +16,7 @@ class _CoinsViewState extends State<CoinsView> {
   void initState() {
     super.initState();
 
-    // context.read<CoinsBloc>().add(GetCoinsEvent(take: 15, skip: 0));
+    context.read<CoinsBloc>().add(GetCoinsEvent(take: 15, skip: 0));
   }
 
   @override
@@ -33,11 +33,11 @@ class _CoinsViewState extends State<CoinsView> {
             if (state.isLoading ?? false) {
               return Center(child: CircularProgressIndicator());
             }
-            // if (state.data != null) {
-            return CoinsListWidget();
-            // } else {
-            // return SizedBox();
-            // }
+            if (state.data != null) {
+              return CoinsListWidget(data: state.data);
+            } else {
+              return SizedBox();
+            }
           },
         ),
       ),
