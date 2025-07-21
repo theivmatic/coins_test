@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:coin_cap_test/src/feature/coins/domain/entities/data.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/tile.dart';
 import 'package:flutter/material.dart';
@@ -13,26 +12,56 @@ Color generateRandomColor() {
   return Color.fromRGBO(red, green, blue, 1.0);
 }
 
-class CoinsListWidget extends StatelessWidget {
+class CoinsListWidget extends StatefulWidget {
   final ResponseEntity? data;
 
   const CoinsListWidget({super.key, required this.data});
 
   @override
+  State<CoinsListWidget> createState() => _CoinsListWidgetState();
+}
+
+class _CoinsListWidgetState extends State<CoinsListWidget> {
+  final _scrollController = ScrollController();
+
+  void _onScroll() {
+    if (_scrollController.position.pixels + 100 >
+        _scrollController.position.maxScrollExtent) {
+      // if (!isLoadingNextPageActive && isNextPageAvailableActive) {
+      //   isLoadingNextPageActive = true;
+      //   widget.getNextFines(true, widget.activeFines.length, (isAvailable) {
+      //     isLoadingNextPageActive = false;
+      //     isNextPageAvailableActive = isAvailable;
+      //   });
+      // }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ListView.separated(
-      itemCount: data?.data?.length ?? 0,
-      // itemCount: 3,
+      itemCount: widget.data?.data?.length ?? 0,
       separatorBuilder: (context, index) => SizedBox(height: 28),
+      controller: _scrollController,
       itemBuilder:
           (context, index) => CoinTileWidget(
             color: generateRandomColor(),
-            name: data?.data?[index].name ?? '',
-            // name: 'BTC',
+            name: widget.data?.data?[index].name ?? '',
             price: double.parse(
-              data?.data?[index].priceUsd ?? '',
+              widget.data?.data?[index].priceUsd ?? '',
             ).toStringAsFixed(2),
-            // price: '1200',
           ),
     );
   }

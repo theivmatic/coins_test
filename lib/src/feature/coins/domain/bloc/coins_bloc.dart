@@ -30,8 +30,23 @@ class CoinsBloc extends Bloc<CoinsEvent, CoinsState> {
         take: event.take,
         skip: event.skip,
       );
-      emit(state.copyWith(data: data, isLoading: false));
+      if ((data.data ?? []).isNotEmpty) {
+        if ((event.skip ?? 0) > 0) {
+          final coins = state.data?.data ?? [];
+          coins.addAll(data.data ?? []);
+          emit(
+            state.copyWith(
+              data: state.data?.copyWith(data: coins),
+              isLoading: false,
+            ),
+          );
+        } else {
+          emit(state.copyWith(data: data, isLoading: false));
+        }
+      }
+      event.onFinish?.call((data.data?.length ?? 0) < 10 ? false : true);
     } on Exception catch (e) {
+      event.onFinish?.call(false);
       emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }

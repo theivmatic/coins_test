@@ -6,6 +6,7 @@ sealed class CoinsEvent {}
 class GetCoinsEvent extends CoinsEvent {
   final int? take;
   final int? skip;
+  final Function(bool)? onFinish;
 
-  GetCoinsEvent({this.take, this.skip});
+  GetCoinsEvent({this.take, this.skip, this.onFinish});
 }

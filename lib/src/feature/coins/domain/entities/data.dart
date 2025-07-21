@@ -13,6 +13,12 @@ class ResponseEntity {
     timestamp: dto.timestamp,
     data: dto.data?.map(CoinEntity.fromDTO).toList(),
   );
+
+  ResponseEntity copyWith({int? timestamp, List<CoinEntity>? data}) =>
+      ResponseEntity(
+        timestamp: timestamp ?? this.timestamp,
+        data: data ?? this.data,
+      );
 }
 
 class CoinEntity {
