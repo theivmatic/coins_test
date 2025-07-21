@@ -1,3 +1,4 @@
+import 'package:coin_cap_test/src/core/theme/text.dart';
 import 'package:flutter/material.dart';
 
 class CoinTileWidget extends StatelessWidget {
@@ -18,13 +19,16 @@ class CoinTileWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         DecoratedBox(
-          decoration: BoxDecoration(color: color),
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(18),
+          ),
           child: SizedBox(width: 56, height: 56),
         ),
         SizedBox(width: 16),
-        Text(name.toUpperCase()),
+        Text(name.toUpperCase(), style: AppText.text),
         const Spacer(),
-        Text(price),
+        Text('\$$price', style: AppText.text),
       ],
     );
   }

@@ -29,3 +29,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - assets/
+
+  fonts:
+    - family: SFProText
+      fonts:
+        - asset: fonts/SFProText.ttf
