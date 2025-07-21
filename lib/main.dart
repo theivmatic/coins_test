@@ -1,5 +1,6 @@
 import 'package:coin_cap_test/src/core/di/service_locator.dart';
 import 'package:coin_cap_test/src/core/observers/bloc_observer.dart';
+import 'package:coin_cap_test/src/feature/app.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/bloc/coins_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,15 +24,4 @@ void main() async {
       child: const MainApp(),
     ),
   );
-}
-
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
-    );
-  }
 }
