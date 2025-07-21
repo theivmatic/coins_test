@@ -1,5 +1,8 @@
 import 'package:coin_cap_test/src/feature/coins/data/dto/data.dart';
 
+ResponseEntity responseEntityFromDTO(ResponseDTO dto) =>
+    ResponseEntity.fromDTO(dto);
+
 class ResponseEntity {
   int? timestamp;
   List<CoinEntity>? data;
