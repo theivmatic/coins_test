@@ -17,6 +17,8 @@ dependencies:
   flutter_bloc: ^8.1.2
   # comparing dart objects
   equatable: ^2.0.5
+  # di
+  get_it: ^8.0.3
 
 dev_dependencies:
   flutter_test:
