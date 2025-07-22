@@ -26,7 +26,10 @@ class CoinTileWidget extends StatelessWidget {
           child: SizedBox(width: 56, height: 56),
         ),
         SizedBox(width: 16),
-        Text(name.toUpperCase(), style: AppText.text),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Text(name.toUpperCase(), style: AppText.text),
+        ),
         const Spacer(),
         Text('\$$price', style: AppText.text),
       ],

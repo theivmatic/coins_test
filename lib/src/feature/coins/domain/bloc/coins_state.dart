@@ -30,6 +30,7 @@ final class CoinsInitialState extends CoinsState {
   CoinsState copyWith({
     ResponseEntity? data,
     bool? isLoading,
+    bool? isLoadingNext,
     String? errorMessage,
   }) => CoinsInitialState(
     data: data ?? this.data,

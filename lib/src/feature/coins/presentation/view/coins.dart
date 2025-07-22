@@ -1,6 +1,7 @@
 import 'package:coin_cap_test/src/core/theme/text.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/bloc/coins_bloc.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/list.dart';
+import 'package:coin_cap_test/src/feature/coins/presentation/widgets/no_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -36,7 +37,13 @@ class _CoinsViewState extends State<CoinsView> {
             if (state.data != null) {
               return CoinsListWidget(data: state.data);
             } else {
-              return SizedBox();
+              return NoDataWidget(
+                onPressed: () {
+                  context.read<CoinsBloc>().add(
+                    GetCoinsEvent(take: 15, skip: 0),
+                  );
+                },
+              );
             }
           },
         ),

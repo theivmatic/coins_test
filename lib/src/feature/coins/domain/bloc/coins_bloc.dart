@@ -24,7 +24,7 @@ class CoinsBloc extends Bloc<CoinsEvent, CoinsState> {
     GetCoinsEvent event,
     Emitter<CoinsState> emit,
   ) async {
-    emit(state.copyWith(isLoading: true, errorMessage: null));
+    emit(state.copyWith(isLoading: (event.skip ?? 0) == 0, errorMessage: null));
     try {
       final data = await _coinRepository.getCoins(
         take: event.take,
