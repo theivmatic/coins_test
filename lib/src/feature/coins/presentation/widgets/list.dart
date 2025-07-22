@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:coin_cap_test/src/core/widgets/app_loader.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/bloc/coins_bloc.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/entities/data.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/tile.dart';
@@ -84,7 +85,7 @@ class _CoinsListWidgetState extends State<CoinsListWidget> {
         isLoadingNextPage
             ? DecoratedBox(
               decoration: BoxDecoration(color: Colors.white.withOpacity(0.5)),
-              child: Center(child: CircularProgressIndicator()),
+              child: AppLoaderWidget(),
             )
             : SizedBox(),
       ],

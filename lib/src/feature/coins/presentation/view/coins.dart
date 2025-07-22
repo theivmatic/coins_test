@@ -1,4 +1,5 @@
 import 'package:coin_cap_test/src/core/theme/text.dart';
+import 'package:coin_cap_test/src/core/widgets/app_loader.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/bloc/coins_bloc.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/list.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/no_data.dart';
@@ -32,7 +33,7 @@ class _CoinsViewState extends State<CoinsView> {
         child: BlocBuilder<CoinsBloc, CoinsState>(
           builder: (context, state) {
             if (state.isLoading ?? false) {
-              return Center(child: CircularProgressIndicator());
+              return AppLoaderWidget();
             }
             if (state.data != null) {
               return CoinsListWidget(data: state.data);
