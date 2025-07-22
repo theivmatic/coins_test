@@ -1,5 +1,6 @@
 import 'package:coin_cap_test/src/core/theme/text.dart';
 import 'package:coin_cap_test/src/core/widgets/app_loader.dart';
+import 'package:coin_cap_test/src/core/widgets/refresh_indicator.dart';
 import 'package:coin_cap_test/src/feature/coins/domain/bloc/coins_bloc.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/list.dart';
 import 'package:coin_cap_test/src/feature/coins/presentation/widgets/no_data.dart';
@@ -28,25 +29,30 @@ class _CoinsViewState extends State<CoinsView> {
         title: Text('COINS', style: AppText.text.copyWith(fontSize: 20)),
         surfaceTintColor: Colors.transparent,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: BlocBuilder<CoinsBloc, CoinsState>(
-          builder: (context, state) {
-            if (state.isLoading ?? false) {
-              return AppLoaderWidget();
-            }
-            if (state.data != null) {
-              return CoinsListWidget(data: state.data);
-            } else {
-              return NoDataWidget(
-                onPressed: () {
-                  context.read<CoinsBloc>().add(
-                    GetCoinsEvent(take: 15, skip: 0),
-                  );
-                },
-              );
-            }
-          },
+      body: CustomRefreshIndicator(
+        onRefresh: () async {
+          context.read<CoinsBloc>().add(GetCoinsEvent(take: 15, skip: 0));
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: BlocBuilder<CoinsBloc, CoinsState>(
+            builder: (context, state) {
+              if (state.isLoading ?? false) {
+                return AppLoaderWidget();
+              }
+              if (state.data != null) {
+                return CoinsListWidget(data: state.data);
+              } else {
+                return NoDataWidget(
+                  onPressed: () {
+                    context.read<CoinsBloc>().add(
+                      GetCoinsEvent(take: 15, skip: 0),
+                    );
+                  },
+                );
+              }
+            },
+          ),
         ),
       ),
     );
