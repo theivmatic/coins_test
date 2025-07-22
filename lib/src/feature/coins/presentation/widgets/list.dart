@@ -6,15 +6,6 @@ import 'package:coin_cap_test/src/feature/coins/presentation/widgets/tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-Color generateRandomColor() {
-  final random = Random();
-  int red = random.nextInt(256);
-  int green = random.nextInt(256);
-  int blue = random.nextInt(256);
-
-  return Color.fromRGBO(red, green, blue, 1.0);
-}
-
 class CoinsListWidget extends StatefulWidget {
   final ResponseEntity? data;
 
@@ -50,6 +41,15 @@ class _CoinsListWidgetState extends State<CoinsListWidget> {
         );
       }
     }
+  }
+
+  Color generateRandomColor() {
+    final random = Random();
+    int red = random.nextInt(256);
+    int green = random.nextInt(256);
+    int blue = random.nextInt(256);
+
+    return Color.fromRGBO(red, green, blue, 1.0);
   }
 
   @override
